@@ -11,9 +11,27 @@ Make the GET /chats request every X seconds to ensure your user sees the latest 
 */
 
 (function() {
-
   window.Chat = {};
+  Chat.loginKey = "";
 
+  Chat.signup = function(username, password) {
+   
+    $.ajax({
+      type: 'POST',
+      contentType: "multipart/form-data",
+      data: {
+        username: username,
+      password: password},
+      url:'http://chat.api.mks.io/signup'
+    }).success(function () {  
+      App.pubsub.emit('signed');
+      
+    });
+  };
+
+  Chat.login = function() {
+
+  };
   Chat.set = function() {
 
   };

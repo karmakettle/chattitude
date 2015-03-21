@@ -10,6 +10,9 @@
   App.pubsub.on('got', function(data) {
     Presenter.displayChats(data);
   })
+  App.pubsub.on('signed', function() {
+    $('.signup').hide();
+  });
 
   Presenter.buildChat = function(chat) {
     //user, message, time, id
@@ -17,6 +20,7 @@
     //div with class = chat
     var element;
     element = '<div data-time="' + chat['time'] + '"data-id="' + chat['id'] + '"class="chat">' + chat['user'] + ': ' + chat['message'] + '</div>';
+
     return element;
   };
 
@@ -25,7 +29,6 @@
       //clear current chats view
       $view = $('.chats');
       $view.empty();
-
       for (var i = 0; i < data.length; i++) {
         $view.append(Presenter.buildChat(data[i]));
       }
@@ -34,4 +37,10 @@
 
 $(document).ready(function(){
   window.init();
+  $('#signup').on('click', function(){
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+  // debugger;
+    Chat.signup(username, password);
+});
 });
