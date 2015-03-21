@@ -18,3 +18,38 @@ border-radius: 10px
 	border-color: gray;
 	min-height: 10em;
 }
+.signup{
+
+  border-style: solid;
+  position:relative;
+  border-radius: 6px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+#signup{
+  position:relative;
+  left: 130px;
+  width:80px;
+  height: 30px;
+}
+#memory { 
+position:absolute;
+  left: 32px;
+    width: 300px;
+    
+}
+#password{
+position:absolute;
+  left: 110px;
+   width: 200px;
+}
+#username{
+position:absolute;
+  left: 110px;
+   width: 200px;
+}
+p {
+  text-align: left;
+}
