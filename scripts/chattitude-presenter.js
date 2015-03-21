@@ -1,6 +1,7 @@
 (function(){
   window.init = function(){
 
+  if ( window.localStorage['apiToken'] ) App.pubsub.emit('logged');
   setInterval(Chat.get, 3000);
   
   }
@@ -9,17 +10,17 @@
 
   App.pubsub.on('got', function(data) {
     Presenter.displayChats(data);
-  })
-  // App.pubsub.on('signed', function() {
-  //   $('.signup').hide();
-  //   // $('#post').show();
-  // });
+  });
+    App.pubsub.on('sent', function() {
+    document.getElementById('chatbox').value = "";
+  });
+
+
   App.pubsub.on('logged', function(api){
     console.log(api);
     $('.signup').hide();
     $('#post').show();
   });
-  // App.
 
   Presenter.buildChat = function(chat) {
     //user, message, time, id
@@ -62,5 +63,12 @@ $(document).ready(function(){
   var password = document.getElementById('password').value;
 
   Chat.signin(username, password);
+  });
+
+  $('#scream').on('click', function(){
+    var message = document.getElementById('chatbox').value;
+    var screaming = message.toUpperCase();
+    var apiToken = window.localStorage['apiToken'];
+    Chat.set(screaming, apiToken);
   });
 });

@@ -23,7 +23,6 @@ Make the GET /chats request every X seconds to ensure your user sees the latest 
         username: username,
         password: password },
     }).success(function () {  
-      // App.pubsub.emit('signed');
       Chat.signin(username, password);
       console.log("signed up")
       
@@ -44,8 +43,18 @@ Make the GET /chats request every X seconds to ensure your user sees the latest 
         console.log("signed in, apiToken=" + response['apiToken']);
       });
   };
-  Chat.set = function() {
-
+  Chat.set = function(screaming, token) {
+    $.ajax({
+      type: 'POST',
+      url:'http://chat.api.mks.io/chats',
+      contentType: "multipart/form-data",
+      data: { apiToken: token, 
+              message: screaming },
+    }).success(function () {  
+      App.pubsub.emit('sent');
+      console.log("message sent");
+      
+    });
   };
 
   Chat.get = function() {
