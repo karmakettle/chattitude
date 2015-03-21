@@ -1,0 +1,20 @@
+body {
+  background: #F5FAFC;
+  font: 18px Arial, sans-serif;
+  text-align: center;
+}
+
+.title {
+font: 24px;
+border-style: double;
+margin: 0 auto;
+padding: 10px;
+width: 20%;
+border-radius: 10px
+}
+.chats {
+	border-style: solid;
+	border-radius: 6px;
+	border-color: gray;
+	min-height: 10em;
+}
