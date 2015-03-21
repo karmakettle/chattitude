@@ -28,12 +28,7 @@ border-radius: 10px
   margin-right: auto;
   padding: 20px;
 }
-#signup{
-  position:relative;
-  left: 130px;
-  width:80px;
-  height: 30px;
-}
+
 #memory { 
 position:absolute;
   left: 32px;
@@ -52,4 +47,8 @@ position:absolute;
 }
 p {
   text-align: left;
+}
+
+#post {
+	display:none;
 }

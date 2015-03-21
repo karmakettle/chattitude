@@ -10,9 +10,16 @@
   App.pubsub.on('got', function(data) {
     Presenter.displayChats(data);
   })
-  App.pubsub.on('signed', function() {
+  // App.pubsub.on('signed', function() {
+  //   $('.signup').hide();
+  //   // $('#post').show();
+  // });
+  App.pubsub.on('logged', function(api){
+    console.log(api);
     $('.signup').hide();
+    $('#post').show();
   });
+  // App.
 
   Presenter.buildChat = function(chat) {
     //user, message, time, id
@@ -32,15 +39,28 @@
       for (var i = 0; i < data.length; i++) {
         $view.append(Presenter.buildChat(data[i]));
       }
-}
+  };
+
+  Presenter.postChat = function() {
+    
+  };
+
 })();
 
 $(document).ready(function(){
   window.init();
+
   $('#signup').on('click', function(){
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
-  // debugger;
-    Chat.signup(username, password);
-});
+
+  Chat.signup(username, password);
+  });
+
+  $('#signin').on('click', function(){
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+
+  Chat.signin(username, password);
+  });
 });

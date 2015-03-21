@@ -12,25 +12,37 @@ Make the GET /chats request every X seconds to ensure your user sees the latest 
 
 (function() {
   window.Chat = {};
-  Chat.loginKey = "";
 
   Chat.signup = function(username, password) {
    
     $.ajax({
       type: 'POST',
+      url:'http://chat.api.mks.io/signup',
       contentType: "multipart/form-data",
       data: {
         username: username,
-      password: password},
-      url:'http://chat.api.mks.io/signup'
+        password: password },
     }).success(function () {  
-      App.pubsub.emit('signed');
+      // App.pubsub.emit('signed');
+      Chat.signin(username, password);
+      console.log("signed up")
       
     });
   };
 
-  Chat.login = function() {
-
+  Chat.signin = function(username, password) {
+    $.ajax({
+      type: "POST",
+      url: "http://chat.api.mks.io/signin",
+      contentType: "multipart/form-data",
+      data: {
+        username: username,
+        password: password },
+      }).success(function(response) {
+        App.pubsub.emit('logged', response);
+        window.localStorage['apiToken'] = response['apiToken'];
+        console.log("signed in, apiToken=" + response['apiToken']);
+      });
   };
   Chat.set = function() {
 
@@ -43,7 +55,6 @@ Make the GET /chats request every X seconds to ensure your user sees the latest 
     type: 'GET',
     url: 'http://chat.api.mks.io/chats'
   }).success(function (chats) {
-    // console.log("Got chats:", chats)
     App.pubsub.emit('got', chats);
   });
 

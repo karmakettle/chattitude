@@ -10,14 +10,22 @@
         <script src="scripts/chattitude-presenter.js"></script>
 	</head>
 	<body>
-	<div class="title"><b>CHATTITUDE</b></div>
-  <div class="signup">
-  <p>Name:<input name="textname" id='username' type="text" /></p>
-  <p>Password:<input name="password" id='password' type="text" /></p>
-  <p>Password Hint: What is your most terrifying memory?</p>
-  <input name="memory" id='memory' type="text" /><button id="signup">Sign Up!</button>
-  
-  </div>
+  	<div class="title"><b>CHATTITUDE</b></div>
+
+    <div class="signup">
+      <div class="buttons">
+        <a href="#" id="signin">Sign In</a> | <a href="#" id="signup">Sign Up!</a>
+      </div>
+      <p>Name:<input name="textname" id='username' type="text" /></p>
+      <p>Password:<input name="password" id='password' type="text" /></p>
+      <div class="error"></div>
+    </div>
+
+    <div id="post">
+      <textarea></textarea>
+      <button type="button">Scream</button>
+    </div>  
+
     <div class="chats"></div>
 	</body>
 
