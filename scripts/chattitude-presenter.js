@@ -1,4 +1,5 @@
 (function(){
+  // initialize
   window.init = function(){
 
   if ( window.localStorage['apiToken'] ) App.pubsub.emit('logged', localStorage['apiToken']);
@@ -6,15 +7,17 @@
   
   }
 
+  // Presenter
   window.Presenter = {};
 
+  // Model listeners
   App.pubsub.on('got', function(data) {
     Presenter.displayChats(data);
   });
-    App.pubsub.on('sent', function() {
+  
+  App.pubsub.on('sent', function() {
     document.getElementById('chatbox').value = "";
   });
-
 
   App.pubsub.on('logged', function(api){
     console.log(api);
@@ -22,6 +25,7 @@
     $('#post').show();
   });
 
+  // View builders
   Presenter.buildChat = function(chat) {
     //escape character security:
     var lt = /</g,
@@ -36,7 +40,6 @@
     return element;
   };
 
-  //This is part of viewer
   Presenter.displayChats = function(data) {
     //clear current chats view
     $view = $('.chats');
@@ -46,12 +49,9 @@
     }
   };
 
-  Presenter.postChat = function() {
-    
-  };
-
 })();
 
+// View listeners
 $(document).ready(function(){
   window.init();
 
