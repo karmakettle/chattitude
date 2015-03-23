@@ -7,8 +7,18 @@
   
   }
 
-  // Presenter
-  window.Presenter = {};
+  // View-models
+  window.AccountForm = {};
+  window.Chatform = {};
+
+  AccountForm.viewmodel = {
+    username: '',
+    password: '',
+    set: function (name, value) {
+      AccountForm.viewmodel[name] = value;
+      App.pubsub.emit('change:AccountForm');
+    }
+  };
 
   // Model listeners
   App.pubsub.on('got', function(data) {
@@ -40,7 +50,7 @@
     return element;
   };
 
-  Presenter.displayChats = function(data) {
+  Chats.view = function(data) {
     //clear current chats view
     $view = $('.chats');
     $view.empty();
@@ -59,14 +69,14 @@ $(document).ready(function(){
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
 
-  Chat.signup(username, password);
+  User.signup(username, password);
   });
 
   $('#signin').on('click', function(){
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
 
-  Chat.signin(username, password);
+  User.signin(username, password);
   });
 
   $('#scream').on('click', function(){
